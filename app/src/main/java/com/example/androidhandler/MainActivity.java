@@ -14,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button handler = findViewById(R.id.handler_activity);
-        Button rx_java = findViewById(R.id.rx_java);
+        Button rxJava = findViewById(R.id.rx_java);
+
         handler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        rx_java.setOnClickListener(new View.OnClickListener() {
+        rxJava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startRxActivity();
