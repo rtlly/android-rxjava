@@ -3,4 +3,6 @@
     <string name="handleractivity">HandlerActivity</string>
     <string name="button_A">send message A</string>
     <string name="button_B">send message B</string>
+    <string name="rxactivity">RxActivity</string>
+    <string name="shared_preferences">Shared Preferences</string>
 </resources>

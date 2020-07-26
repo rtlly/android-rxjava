@@ -5,31 +5,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    tools:context=".MainActivity">
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".SPActivity">
 
-    <Button
-        android:id="@+id/handler_activity"
+    <EditText
+        android:id="@+id/edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/handleractivity"
-        android:textAllCaps="false"
-        android:layout_gravity="center" />
-
-    <Button
-        android:id="@+id/rx_java"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="@string/rxactivity"
+        android:padding="10dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:background="@drawable/edit_background"/>
 
     <Button
-        android:id="@+id/shared_preferences"
+        android:id="@+id/save_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/shared_preferences"
-        android:textAllCaps="false"
         android:layout_gravity="center"
+        android:textAllCaps="false"
+        android:text="save text"
         android:layout_marginTop="10dp"/>
 </LinearLayout>
