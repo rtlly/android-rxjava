@@ -1,15 +1,13 @@
 package com.example.androidhandler;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -43,15 +41,16 @@ public class NetworkActivity extends AppCompatActivity {
 
     private void getDataFromNetwork() {
         final OkHttpClient client = new OkHttpClient();
-        Observable.defer(new Callable<ObservableSource<Response>>() {
+        Observable.defer(new Callable<ObservableSource<PersonResponse>>() {
             @Override
-            public ObservableSource<Response> call() {
-                Response response = null;
+            public ObservableSource<PersonResponse> call() {
                 try {
-                    response = client.newCall(new Request.Builder()
+                    Response response = client.newCall(new Request.Builder()
                             .url("https://twc-android-bootcamp.github.io/fake-data/data/default.json")
                             .build()).execute();
-                    return Observable.just(response);
+                    Gson gson = new Gson();
+                    PersonResponse persons = gson.fromJson(response.body().string(), PersonResponse.class);
+                    return Observable.just(persons);
                 } catch (IOException e) {
                     return Observable.error(e);
                 }
@@ -62,29 +61,23 @@ public class NetworkActivity extends AppCompatActivity {
                 .subscribe(responseObserver());
     }
 
-    private Observer<Response> responseObserver() {
-        return new Observer<Response>() {
+    private Observer<PersonResponse> responseObserver() {
+        return new Observer<PersonResponse>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(Response response) {
-                try {
-                    String jsonData = response.body().string();
-                    JSONObject data = new JSONObject(jsonData);
-                    JSONArray dataArray = data.getJSONArray("data");
-                    Toast toast = Toast.makeText(getApplicationContext(), dataArray.get(0).toString(), Toast.LENGTH_LONG);
-                    toast.show();
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
+            public void onNext(PersonResponse response) {
+                if (response.getData().size() >= 1 && response.getData().get(0) != null) {
+                    Toast.makeText(getApplicationContext(), response.getData().get(0).getName(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onError(Throwable e) {
-                Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
