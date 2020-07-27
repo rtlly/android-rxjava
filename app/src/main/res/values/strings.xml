@@ -3,4 +3,7 @@
     <string name="handleractivity">HandlerActivity</string>
     <string name="button_A">send message A</string>
     <string name="button_B">send message B</string>
+    <string name="networkactivity">NetworkActivity</string>
+    <string name="rxactivity">RxActivity</string>
+    <string name="get_data">Get data</string>
 </resources>

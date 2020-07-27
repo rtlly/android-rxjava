@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button handler = findViewById(R.id.handler_activity);
         Button rxJava = findViewById(R.id.rx_java);
+        Button network = findViewById(R.id.network);
 
         handler.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
                 startRxActivity();
             }
         });
+
+        network.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startNetworkActivity();
+            }
+        });
     }
 
     private void startHandlerActivity() {
@@ -38,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRxActivity() {
         Intent intent = new Intent(this, RxActivity.class);
+        startActivity(intent);
+    }
+
+    private void startNetworkActivity() {
+        Intent intent = new Intent(this, NetworkActivity.class);
         startActivity(intent);
     }
 }
